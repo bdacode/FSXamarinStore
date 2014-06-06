@@ -18,10 +18,7 @@ type BadgeDrawable (child:Drawable) =
     let mutable count = 0
     let mutable alpha = 0xFF
 
-    let mutable alphaAnimator:ValueAnimator = null
-
-    let animationHandler (sender:obj) countParam = (sender :?> Animator).RemoveAllListeners()
-                                                   count <- countParam
+    let mutable alphaAnimator:ValueAnimator = null                                                   
 
     member this.Count 
         with get () = count 
@@ -40,7 +37,8 @@ type BadgeDrawable (child:Drawable) =
         alphaAnimator.SetDuration Duration |> ignore
         alphaAnimator.RepeatMode <- ValueAnimatorRepeatMode.Reverse
         alphaAnimator.RepeatCount <- 1
-        alphaAnimator.AnimationRepeat.AddHandler(fun sender e -> animationHandler sender countParam)
+        alphaAnimator.AnimationRepeat.AddHandler(fun sender e -> (sender :?> Animator).RemoveAllListeners()
+                                                                 count <- countParam)
         alphaAnimator.Start ()
 
     override this.Draw canvas =
@@ -63,9 +61,9 @@ type BadgeDrawable (child:Drawable) =
         base.OnBoundsChange bounds
         child.SetBounds(bounds.Left, bounds.Top, bounds.Right, bounds.Bottom)
     
-    override this.IntrinsicWidth with get () = child.IntrinsicWidth
-    override this.IntrinsicHeight with get () = child.IntrinsicHeight
-    override this.Opacity with get () = child.Opacity
+    override this.IntrinsicWidth = child.IntrinsicWidth
+    override this.IntrinsicHeight = child.IntrinsicHeight
+    override this.Opacity = child.Opacity
 
     override this.SetAlpha alphaParam =
         alpha <- alphaParam

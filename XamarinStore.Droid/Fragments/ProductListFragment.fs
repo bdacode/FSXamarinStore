@@ -31,7 +31,7 @@ type ProductListViewAdapter (context:Context) =
         with e->()}
 
     member val Products = ([||]: Product.Product array) with get,set
-    override this.Count with get () = this.Products.Length
+    override this.Count = this.Products.Length
 
     override this.GetItem position = new Java.Lang.String(this.Products.[position].ToString()) :> Java.Lang.Object
 

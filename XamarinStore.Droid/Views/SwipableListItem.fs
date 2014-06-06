@@ -20,21 +20,21 @@ type SwipableListItem(context: Context, attrs:IAttributeSet) as this =
     do this.SetOnTouchListener listener
        listener.ItemSwipped <- fun _ -> listener.ResetSwipe()
 
-    static member Colors with get() = [| Android.Graphics.Color.Rgb(DarkTone, DarkTone, DarkTone).ToArgb()
-                                         Android.Graphics.Color.Rgb(LightTone, LightTone, LightTone).ToArgb()
-                                         Android.Graphics.Color.Rgb(LightTone, LightTone, LightTone).ToArgb()
-                                         Android.Graphics.Color.Rgb(DarkTone, DarkTone, DarkTone).ToArgb ()|]
-    static member Positions with get() = [| 0.0f; 0.15f; 0.85f; 1.0f |]
+    static member Colors = [| Android.Graphics.Color.Rgb(DarkTone, DarkTone, DarkTone).ToArgb()
+                              Android.Graphics.Color.Rgb(LightTone, LightTone, LightTone).ToArgb()
+                              Android.Graphics.Color.Rgb(LightTone, LightTone, LightTone).ToArgb()
+                              Android.Graphics.Color.Rgb(DarkTone, DarkTone, DarkTone).ToArgb ()|]
+    static member Positions = [| 0.0f; 0.15f; 0.85f; 1.0f |]
                                              
-    member this.SwipeListener with get () = listener
+    member this.SwipeListener = listener
 
-    member this.MainContent with get () = if mainContent = null then 
-                                              mainContent <- this.FindViewById Resource_Id.SwipeContent
-                                          mainContent
+    member this.MainContent = if mainContent = null then 
+                                  mainContent <- this.FindViewById Resource_Id.SwipeContent
+                              mainContent
 
-    member this.SecondaryContent with get () = if secondaryContent = null then
-                                                   secondaryContent <- this.FindViewById Resource_Id.SwipeAfter
-                                               secondaryContent
+    member this.SecondaryContent = if secondaryContent = null then
+                                       secondaryContent <- this.FindViewById Resource_Id.SwipeAfter
+                                   secondaryContent
 
     override this.DispatchDraw canvas =
         // Draw interior shadow

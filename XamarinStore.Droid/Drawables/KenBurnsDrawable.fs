@@ -70,4 +70,4 @@ type KenBurnsDrawable (defaultColor: Color) =
 
     override this.SetColorFilter cf =
         ()
-    override this.Opacity with get () = int Format.Opaque
+    override this.Opacity = int Format.Opaque

@@ -18,14 +18,14 @@ type CircleDrawable(bmp:Bitmap) =
         base.OnBoundsChange bounds
         oval.Set(0.0f, 0.0f, float32 (bounds.Width()), float32 (bounds.Height()))
 
-    override this.IntrinsicWidth with get () = bmp.Width
+    override this.IntrinsicWidth = bmp.Width
 
-    override this.IntrinsicHeight with get () = bmp.Height
+    override this.IntrinsicHeight = bmp.Height
 
     override this.SetAlpha alpha =
         ()
 
-    override this.Opacity with get () = int Format.Opaque
+    override this.Opacity = int Format.Opaque
 
     override this.SetColorFilter cf =
         ()
