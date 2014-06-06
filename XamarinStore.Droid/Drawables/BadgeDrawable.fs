@@ -34,14 +34,14 @@ type BadgeDrawable (child:Drawable) =
             alphaAnimator.Cancel ()
             alphaAnimator <- null
         
-        (*let Duration = 300L
+        let Duration = 300L
         
         alphaAnimator <- ObjectAnimator.OfInt (this, "alpha", 0xFF, 0)
         alphaAnimator.SetDuration Duration |> ignore
         alphaAnimator.RepeatMode <- ValueAnimatorRepeatMode.Reverse
         alphaAnimator.RepeatCount <- 1
         alphaAnimator.AnimationRepeat.AddHandler(fun sender e -> animationHandler sender countParam)
-        alphaAnimator.Start ()*)
+        alphaAnimator.Start ()
 
     override this.Draw canvas =
         child.Draw canvas
@@ -67,8 +67,8 @@ type BadgeDrawable (child:Drawable) =
     override this.IntrinsicHeight with get () = child.IntrinsicHeight
     override this.Opacity with get () = child.Opacity
 
-    override this.SetAlpha alpha =
-        this.Alpha <- alpha
+    override this.SetAlpha alphaParam =
+        alpha <- alphaParam
         this.InvalidateSelf()
     
     override this.SetColorFilter filter =
