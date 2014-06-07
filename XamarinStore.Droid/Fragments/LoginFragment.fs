@@ -35,7 +35,7 @@ type LoginFragment() =
         let! success = WebService.Shared.Login usernameParam passwordParam
         if success then
             let! canContinue = WebService.Shared.PlaceOrder (WebService.Shared.CurrentUser, true)
-            if canContinue.Success 
+            if not canContinue.Success 
             then Toast.MakeText(this.Activity,"Sorry, only one shirt per person. Edit your cart and try again.", ToastLength.Long).Show()
             else this.LoginSucceeded ()
         else Toast.MakeText(this.Activity, "Please verify your Xamarin account credentials and try again", ToastLength.Long).Show()

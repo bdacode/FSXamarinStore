@@ -68,7 +68,8 @@
             match products with
             | [||] -> try
                           return! System.Threading.Tasks.Task.Run(fun _->
-                              let response = ReadResponseText (CreateRequest "products")
+                              let extraParams = "&includeMonkeys=true"
+                              let response = ReadResponseText (CreateRequest ("products?shirttype=fsharp"+extraParams))
                               products <- JsonConvert.DeserializeObject<Product array>(response)
                               products ) |> Async.AwaitTask
                       with | e-> Console.WriteLine e

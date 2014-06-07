@@ -4,8 +4,9 @@
     open Helpers
 
     type ProductType =
-    | MensFSharpShirt
-    | WomensFSharpShirt
+    | CSharpShirt = 0
+    | FSharpShirt = 2
+    | Monkey = 1
 
     type ProductColor = 
         { Name : string
