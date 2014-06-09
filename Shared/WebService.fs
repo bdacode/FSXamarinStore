@@ -68,7 +68,8 @@
             match products with
             | [||] -> try
                           return! System.Threading.Tasks.Task.Run(fun _->
-                              let extraParams = "&includeMonkeys=true"
+                              //let extraParams = "&includeMonkeys=true"
+                              let extraParams = ""
                               let response = ReadResponseText (CreateRequest ("products?shirttype=fsharp"+extraParams))
                               products <- JsonConvert.DeserializeObject<Product array>(response)
                               products ) |> Async.AwaitTask
@@ -171,7 +172,7 @@
                     let verify = if Some(true) = verify then true else false
                     let json = { CurrentOrder with Products = CurrentOrder.Products |> List.map (fun x->x.CreateCopy()) }.GetJson user
                     let content = encoding.GetBytes json
-                    let request = CreateRequest ("order" + if verify then "?verify=1" else "")
+                    let request = CreateRequest ("fsharporder" + if verify then "?verify=1" else "")
                     request.Method <- "POST"
                     request.ContentLength <- int64 content.Length
                      
