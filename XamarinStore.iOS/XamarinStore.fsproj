@@ -102,9 +102,8 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="FSharp.Core">
-      <HintPath>..\..\..\..\..\..\Library\Frameworks\Mono.framework\Versions\3.2.6\lib\mono\gac\FSharp.Core\4.3.0.0__b03f5f7f11d50a3a\FSharp.Core.dll</HintPath>
-    </Reference>
+    <Reference Include="FSharp.Core"/>
+    <Reference Include="mscorelib"/>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
     </Reference>
