@@ -24,7 +24,7 @@ type LoginFragment() =
 
     // TODO: Enter your Xamarin account email address here
     // If you do not have a Xamarin Account please sign up here: https://store.xamarin.com/account/register
-    let XamarinAccountEmail = ""
+    let xamarinAccountEmail = ""
 
     member val LoginSucceeded = fun ()->() with get,set
 
@@ -48,14 +48,14 @@ type LoginFragment() =
     member private this.CreateInstructions (inflater:LayoutInflater) container savedInstanceState =
         let view = inflater.Inflate (Resource_Layout.PrefillXamarinAccountInstructions, null)
         let textView = view.FindViewById<TextView> (Resource_Id.codeTextView)
-        let coloredText = Html.FromHtml ("<font color='#48D1CC'>public readonly</font> <font color='#1E90FF'>string</font> XamarinAccountEmail = <font color='Red'>\"...\"</font>;")
+        let coloredText = Html.FromHtml ("<font color='#48D1CC'>let</font> <font color='#1E90FF'></font> xamarinAccountEmail = <font color='Red'>\"...\"</font>")
         textView.SetText (coloredText, TextView.BufferType.Spannable)
         view
 
     member private this.LoadUserImage () = async {
         //Get the correct size in pixels
         let px = int (TypedValue.ApplyDimension(ComplexUnitType.Dip, 85.0f, this.Activity.Resources.DisplayMetrics))
-        let! data = Gravatar.GetImageBytes XamarinAccountEmail px Gravatar.G
+        let! data = Gravatar.GetImageBytes xamarinAccountEmail px Gravatar.G
         let! image = BitmapFactory.DecodeByteArrayAsync (data, 0, data.Length) |> Async.AwaitTask
         imageView.SetImageDrawable (new CircleDrawable (image)) }
 
@@ -67,11 +67,11 @@ type LoginFragment() =
 
         let textView = view.FindViewById<EditText> (Resource_Id.email)
         textView.Enabled <- false
-        textView.Text <- XamarinAccountEmail
+        textView.Text <- xamarinAccountEmail
 
         password <- view.FindViewById<EditText> (Resource_Id.password)
         login <- view.FindViewById<Button> (Resource_Id.signInBtn)
-        login.Click.Add(fun x-> this.Login XamarinAccountEmail password.Text |> Async.StartImmediate)
+        login.Click.Add(fun x-> this.Login xamarinAccountEmail password.Text |> Async.StartImmediate)
         view
 
     override this.OnCreate savedInstanceState =
@@ -79,7 +79,7 @@ type LoginFragment() =
         this.RetainInstance <- true
 
     override this.OnCreateView (inflater, container, savedInstanceState) =
-        if XamarinAccountEmail = "" then
+        if xamarinAccountEmail = "" then
             this.CreateInstructions inflater container savedInstanceState
         else
             this.CreateLoginView inflater container savedInstanceState
